@@ -1,5 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
+import styled from 'styled-components'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -13,10 +14,10 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
 import { Link } from 'react-router-dom'
+import Chip from '@material-ui/core/Chip'
+import GitHubIcon from '@material-ui/icons/GitHub'
 
 const drawerWidth = 240;
 
@@ -50,6 +51,8 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
   },
   drawerPaper: {
+    borderRight: '0.5px solid #fff',
+    backgroundColor: '#262626',
     width: drawerWidth,
   },
   drawerHeader: {
@@ -105,42 +108,46 @@ export default function PersistentDrawerLeft(props) {
       <Drawer className={classes.drawer} variant="persistent" anchor="left" open={open} classes={{ paper: classes.drawerPaper}}>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? <ChevronLeftIcon style={{ color: '#fff' }}/> : <ChevronRightIcon style={{ color: '#fff' }}/>}
           </IconButton>
         </div>
         <Divider />
-        <List>
-            <Link  to='/'>
-                <ListItem button>
-                    <ListItemIcon><InboxIcon /></ListItemIcon>
-                    <ListItemText primary={'Resumo Mundial'} />
-                </ListItem>
-            </Link>
-           
-            <Link  to='/paises'>
-                <ListItem button >
-                    <ListItemIcon><InboxIcon /></ListItemIcon>
-                    <ListItemText primary={'Países'} />
-                </ListItem>
-            </Link>
-            
-            <Link  to='/noticias'>
-                <ListItem button >
-                    <ListItemIcon><InboxIcon /></ListItemIcon>
-                    <ListItemText primary={'Últimas Notícias'} />
-                </ListItem>
-            </Link>
-        </List>
+        <Div>
+          <List>
+              <ListItem  onClick={()=>{window.location.assign('/')}}>
+                  <ListItemText primary={'Resumo Mundial'} />
+              </ListItem>
+          
+              <ListItem onClick={()=>{window.location.assign('/paises')}}>
+                  <ListItemText primary={'Países'} />
+              </ListItem>
+          
+              <ListItem onClick={()=>{window.location.assign('/noticias')}}>
+                  <ListItemText primary={'Últimas Notícias'} />
+              </ListItem>
+          </List>
+        </Div>
         <Divider />
      
       </Drawer>
       <main className={clsx(classes.content, {[classes.contentShift]: open})}>
         <div className={classes.drawerHeader} />
-        <div>
+        <div  style={{minHeight: '100%'}}>
             {props.children}
         </div>
-        <div style={{marginTop:10, display: 'flex', justifyContent: 'center'}}>Desenvolvido por Juliana Loureiro</div>
       </main>
+
+      <div style={{width: '100%',textAlign:'end', padding:8, position: 'fixed', bottom: 0}}>
+          <Chip icon={<GitHubIcon style={{ color: '#fff' }}/>} style={{ marginRight: 8, marginTop: 8, color: '#fff', backgroundColor: '#DB5ABA '}}
+                size="medium"  label="Desenvolvido por Juliana Loureiro" onClick={()=>{window.open('https://github.com/JullyLoureiro/AppCovid19', '_blank')}}/>
+      </div>
     </div>
   );
 }
+
+export const Div = styled.div`
+  .menuDrawer {
+      color: '#fff';
+  }
+`;
+

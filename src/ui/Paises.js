@@ -23,7 +23,7 @@ export default class App extends React.Component {
     }
 }
 
-componentDidMount = () => {this.setState({showLoading: true}, ()=>{api.get(`countries`).then(dados=>{this.setState({showLoading: false, itens: dados})})})}
+componentDidMount = () => {this.setState({showLoading: true}, ()=>{api.get(`countries`, 1).then(dados=>{this.setState({showLoading: false, itens: dados})})})}
 
 render(){
       const {showLoading,itens} = this.state

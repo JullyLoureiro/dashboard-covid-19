@@ -1,7 +1,13 @@
-import linkapi from './url'
 
-const _api = async (_url, _method, _body) => {
-    const response = await fetch(linkapi + _url, { 
+const linkapi = 'https://coronavirus-19-api.herokuapp.com/'
+const linkapi2 = 'http://coronavirus-tracker-api.herokuapp.com/v2/'
+
+const _api = async (_url,link,_method, _body) => {
+    var api
+    if(link === 1) api = linkapi
+    else api = linkapi2
+
+    const response = await fetch(api + _url, { 
         method: _method, 
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(_body)
@@ -19,26 +25,26 @@ export const api = {
      * @param {String} url Endereço do endpoint (Não inicie com "/" )
      * @param {JSON} body 
      */
-    get: (url, body)=>_api(url,'GET',body),
+    get: (url, link, body)=>_api(url, link, 'GET',body),
 
     /**
      * Retorna uma Promisse de POST
      * @param {String} url
      * @param {JSON} body 
      */
-    post: (url, body)=>_api(url,'POST',body),
+    post: (url, link, body)=>_api(url, link, 'POST',body),
 
      /**
      * Retorna uma Promisse de PUT
      * @param {String} url
      * @param {JSON} body 
      */
-    put: (url, body)=>_api(url,'PUT',body),
+    put: (url, link, body)=>_api(url, link, 'PUT',body),
 
     /**
      * Retorna uma Promisse de DELETE
      * @param {String} url
      * @param {JSON} body 
      */
-    delete: (url, body)=>_api(url,'DELETE',body),
+    delete: (url, link, body)=>_api(url, link, 'DELETE',body),
 }

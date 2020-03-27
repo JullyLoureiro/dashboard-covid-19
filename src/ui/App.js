@@ -5,6 +5,7 @@ import Card from '../components/Card'
 import {api} from '../connection/api'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
+import Chart from 'react-apexcharts'
 
 export default class App extends React.Component {
   constructor(){
@@ -14,6 +15,33 @@ export default class App extends React.Component {
       confirmados: 0,
       mortos: 0,
       recuperados: 0,
+
+      options: {
+        chart: {
+          id: "basic-bar",
+          toolbar: {
+            show: true,
+            offsetX: 0,
+            offsetY: 0,
+            tools: {
+              download: false,
+              selection: true,
+              zoom: true,
+              zoomin: true,
+              zoomout: true,
+              pan: true,
+              reset: false,
+              customIcons: []
+            },
+            autoSelected: 'zoom' 
+          },
+        },
+        xaxis: {
+          type: 'string',
+          categories: []
+        }
+      },
+      series: []
     }
   }
 
@@ -21,8 +49,20 @@ export default class App extends React.Component {
 
 componentDidMount = () => {
   this.setState({showLoading: true}, ()=>{
-    api.get(`all`).then(dados=>{
-      this.setState({showLoading: false, recuperados: dados.recovered, mortos: dados.deaths, contaminados: dados.cases})
+    api.get(`all`, 1).then(dados=>{
+      if(dados !== null && dados !== undefined) this.setState({recuperados: dados.recovered, mortos: dados.deaths, contaminados: dados.cases})
+      api.get(`countries`, 1).then((dados)=>{
+        if(dados !== null && dados !== undefined) {
+            var categories = [], data = []
+            dados.forEach((e, i)=>{
+              if(i>9) return
+              data.push(e.todayCases)
+              categories.push(e.country)
+            })  
+
+            this.setState({showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}]})
+        } else this.setState({showLoading: false})
+      })
     })
   })
 }
@@ -30,13 +70,14 @@ componentDidMount = () => {
 render(){
       const {showLoading, contaminados, mortos, recuperados} = this.state
       return (
-        <div className="App">
+        <div className="App" style={{height: 'auto'}}>
           {showLoading && <Loading />}
           <header className="App-header">
             <Menu>
-             
               <Div>
-                <Grid container spacing={1} direction={'row'}>
+                <h1 style={{textAlign: 'center'}}>Resumo Mundial</h1>
+
+                <Grid container spacing={2} direction={'row'}>
                   <Grid item xs={12} md={3}>
                     <Grid container spacing={2} direction={'column'}>
                         <Grid item xs={12} md={12}>
@@ -56,12 +97,9 @@ render(){
 
                   <Grid item xs={12} md={9}>
                       <div className={'cardResumo card'}>
-                           <h1>Resumo Mundial</h1>
-
-                          etstetetetetetetet
-                          etstetetetetetetet
-                          etstetetetetetetet
-                          etstetetetetetetetetstetetetetetetetetstetetetetetetet
+                          <div className="mixed-chart">
+                              <Chart options={this.state.options} series={this.state.series} type="bar" width="100%"/>
+                          </div>
                       </div>
                   </Grid>
                 </Grid>
@@ -81,7 +119,7 @@ export const Div = styled.div`
         color: #DB5ABA !important;
         border-left: 4px solid #DB5ABA;
         border-radius: 5px;
-        height: 110px;
+        height: 130px;
         box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
 
@@ -90,7 +128,7 @@ export const Div = styled.div`
       color: #e8b127 !important;
       border-left: 4px solid #e8b127;
       border-radius: 5px;
-      height: 110px;
+      height: 130px;
       box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
 
@@ -99,7 +137,7 @@ export const Div = styled.div`
     color: #F24333 !important;
     border-left: 4px solid #F24333;
     border-radius: 5px;
-    height: 110px;
+    height: 130px;
     box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
 
@@ -108,7 +146,7 @@ export const Div = styled.div`
     color:  #39bfe6 !important;
     border-left: 4px solid  #39bfe6;
     border-radius: 5px;
-    height: 110px;
+    height: 130px;
     box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
 
