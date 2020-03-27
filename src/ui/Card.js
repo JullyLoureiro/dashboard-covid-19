@@ -9,9 +9,15 @@ export default class App extends React.Component {
 
     render(){
         return (
-            <h2 className={this.props.classe}>
+            <div className={this.props.classe}>
+                <h2 >
                 {this.props.titulo}
-            </h2>
+                </h2>
+                 <h2>
+                {this.props.valor}
+                </h2>
+            </div>
+            
         )
     }
 }

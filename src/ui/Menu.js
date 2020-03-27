@@ -136,9 +136,9 @@ export default function PersistentDrawerLeft(props) {
       </Drawer>
       <main className={clsx(classes.content, {[classes.contentShift]: open})}>
         <div className={classes.drawerHeader} />
-        <Typography paragraph>
+        <div>
             {props.children}
-        </Typography>
+        </div>
       </main>
     </div>
   );

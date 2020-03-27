@@ -1,3 +1,3 @@
-export const linkapi = 'https://covid19.mathdro.id/api/' //http://coronavirus-tracker-api.herokuapp.com/v2/locations
+export const linkapi = ' https://coronavirus-19-api.herokuapp.com/'//'http://coronavirus-tracker-api.herokuapp.com/v2/'
 
 export default linkapi
