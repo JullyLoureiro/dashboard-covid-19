@@ -55,7 +55,7 @@ componentDidMount = () => {
         if(dados !== null && dados !== undefined) {
             var categories = [], data = [], data2 = []
             dados.forEach((e, i)=>{
-              if(i>4) return
+              if(i>14) return
               data.push(e.todayCases)
               data2.push(e.todayDeaths)
               categories.push(e.country)
