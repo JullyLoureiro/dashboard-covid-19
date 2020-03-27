@@ -113,7 +113,7 @@ export default function PersistentDrawerLeft(props) {
             <Link  to='/paises'>
                 <ListItem button>
                     <ListItemIcon><InboxIcon /></ListItemIcon>
-                    <ListItemText primary={'Resumo Geral'} />
+                    <ListItemText primary={'Resumo Mundial'} />
                 </ListItem>
             </Link>
            

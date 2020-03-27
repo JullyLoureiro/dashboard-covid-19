@@ -36,19 +36,37 @@ render(){
             <Menu>
              
               <Div>
-                <Grid container spacing={2} direction={'column'}>
-                    <Grid item xs={12} md={4}>
-                        <Card classe={'cardCont card'} titulo={'Contaminados'} valor={contaminados}/>
+                <h1>Resumo Mundial</h1>
+                <Grid container spacing={2} direction={'row'}>
+                  <Grid item md={3}>
+                    <Grid container spacing={2} direction={'column'}>
+                        <Grid item xs={12} md={12}>
+                            <Card classe={'cardCont card'} titulo={'Contaminados'} valor={contaminados}/>
+                        </Grid>
+                        <Grid item xs={12} md={12}>
+                            <Card classe={'cardMort card'} titulo={'Mortos'} valor={mortos} />
+                        </Grid>
+                        <Grid item xs={12} md={12}>
+                            <Card classe={'cardRec card'} titulo={'Recuperados'} valor={recuperados} />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} md={4}>
-                        <Card classe={'cardMort card'} titulo={'Mortos'} valor={mortos} />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                        <Card classe={'cardRec card'} titulo={'Recuperados'} valor={recuperados} />
-                    </Grid>
+                  </Grid>
+
+                  <Grid item md={9}>
+                      <div className={'cardResumo card'}>
+                          etstetetetetetetet
+                          etstetetetetetetet
+                          etstetetetetetetet
+                          etstetetetetetetetetstetetetetetetetetstetetetetetetet
+                      </div>
+                  </Grid>
+
                 </Grid>
+                
               </Div>
             </Menu>
+            <div style={{marginTop:10}}>Desenvolvido por Juliana Loureiro</div>
+
           </header>
         </div>
       )
@@ -62,7 +80,6 @@ export const Div = styled.div`
         color: #ff6600 !important;
         border-left: 4px solid #ff6600;
         border-radius: 5px;
-        max-width: 280px;
         min-height: 120px;
         box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
@@ -72,7 +89,6 @@ export const Div = styled.div`
       color: #ff1a75 !important;
       border-left: 4px solid #ff1a75;
       border-radius: 5px;
-      max-width: 280px;
       min-height: 120px;
       box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
@@ -81,12 +97,17 @@ export const Div = styled.div`
     padding: 8px 16px  !important;
     color: #0066ff !important;
     border-left: 4px solid #0066ff;
-    max-width: 280px;
     border-radius: 5px;
     min-height: 120px;
     box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
 
+  .cardResumo  {
+    padding: 8px 16px  !important;
+    color: #000 !important;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
+  }
   .card: hover{
       box-shadow:none;
   }
