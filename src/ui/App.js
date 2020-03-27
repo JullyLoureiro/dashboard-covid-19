@@ -64,11 +64,7 @@ render(){
                           etstetetetetetetetetstetetetetetetetetstetetetetetetet
                       </div>
                   </Grid>
-
                 </Grid>
-            <div style={{marginTop:10}}>Desenvolvido por Juliana Loureiro</div>
-
-                
               </Div>
             </Menu>
 
@@ -81,6 +77,7 @@ render(){
 
 export const Div = styled.div`
   .cardCont{
+        padding-left: 15px;
         color: #F7C548 !important;
         border-left: 4px solid #F7C548;
         border-radius: 5px;
@@ -89,6 +86,7 @@ export const Div = styled.div`
   }
 
   .cardRec{
+      padding-left: 15px;
       color: #DB5ABA !important;
       border-left: 4px solid #DB5ABA;
       border-radius: 5px;
@@ -97,6 +95,7 @@ export const Div = styled.div`
   }
 
   .cardMort {
+    padding-left: 15px;
     color: #F24333 !important;
     border-left: 4px solid #F24333;
     border-radius: 5px;
@@ -105,6 +104,7 @@ export const Div = styled.div`
   }
 
   .cardAtivo  {
+    padding-left: 15px;
     color:  #5AD2F4 !important;
     border-left: 4px solid  #5AD2F4;
     border-radius: 5px;

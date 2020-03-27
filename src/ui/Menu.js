@@ -139,6 +139,7 @@ export default function PersistentDrawerLeft(props) {
         <div>
             {props.children}
         </div>
+        <div style={{marginTop:10, display: 'flex', justifyContent: 'center'}}>Desenvolvido por Juliana Loureiro</div>
       </main>
     </div>
   );
