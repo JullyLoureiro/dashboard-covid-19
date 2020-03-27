@@ -36,9 +36,8 @@ render(){
             <Menu>
              
               <Div>
-                <h1>Resumo Mundial</h1>
-                <Grid container spacing={2} direction={'row'}>
-                  <Grid item md={3}>
+                <Grid container spacing={1} direction={'row'}>
+                  <Grid item xs={12} md={3}>
                     <Grid container spacing={2} direction={'column'}>
                         <Grid item xs={12} md={12}>
                             <Card classe={'cardCont card'} titulo={'Contaminados'} valor={contaminados}/>
@@ -49,11 +48,16 @@ render(){
                         <Grid item xs={12} md={12}>
                             <Card classe={'cardRec card'} titulo={'Recuperados'} valor={recuperados} />
                         </Grid>
+                        <Grid item xs={12} md={12}>
+                            <Card classe={'cardAtivo card'} titulo={'Ativos'} valor={contaminados - recuperados - mortos} />
+                        </Grid>
                     </Grid>
                   </Grid>
 
-                  <Grid item md={9}>
+                  <Grid item xs={12} md={9}>
                       <div className={'cardResumo card'}>
+                           <h1>Resumo Mundial</h1>
+
                           etstetetetetetetet
                           etstetetetetetetet
                           etstetetetetetetet
@@ -62,10 +66,11 @@ render(){
                   </Grid>
 
                 </Grid>
+            <div style={{marginTop:10}}>Desenvolvido por Juliana Loureiro</div>
+
                 
               </Div>
             </Menu>
-            <div style={{marginTop:10}}>Desenvolvido por Juliana Loureiro</div>
 
           </header>
         </div>
@@ -76,29 +81,34 @@ render(){
 
 export const Div = styled.div`
   .cardCont{
-        padding: 8px 8px  !important;
-        color: #ff6600 !important;
-        border-left: 4px solid #ff6600;
+        color: #F7C548 !important;
+        border-left: 4px solid #F7C548;
         border-radius: 5px;
-        min-height: 120px;
+        height: 110px;
         box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
 
-  .cardMort{
-      padding: 8px 16px  !important;
-      color: #ff1a75 !important;
-      border-left: 4px solid #ff1a75;
+  .cardRec{
+      color: #DB5ABA !important;
+      border-left: 4px solid #DB5ABA;
       border-radius: 5px;
-      min-height: 120px;
+      height: 110px;
       box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
 
-  .cardRec  {
-    padding: 8px 16px  !important;
-    color: #0066ff !important;
-    border-left: 4px solid #0066ff;
+  .cardMort {
+    color: #F24333 !important;
+    border-left: 4px solid #F24333;
     border-radius: 5px;
-    min-height: 120px;
+    height: 110px;
+    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
+  }
+
+  .cardAtivo  {
+    color:  #5AD2F4 !important;
+    border-left: 4px solid  #5AD2F4;
+    border-radius: 5px;
+    height: 110px;
     box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
   }
 

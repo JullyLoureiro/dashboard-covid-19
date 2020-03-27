@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {formataMilhar} from '../components/Mascaras'
 
 export default class App extends React.Component {
   
@@ -9,12 +9,12 @@ export default class App extends React.Component {
 
     render(){
         return (
-            <div className={this.props.classe}>
+            <div className={this.props.classe} style={{paddingTop: 1}}>
                 <h2 >
                 {this.props.titulo}
                 </h2>
                  <h2>
-                {this.props.valor}
+                {formataMilhar(this.props.valor)}
                 </h2>
             </div>
             
