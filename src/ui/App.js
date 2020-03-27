@@ -53,14 +53,15 @@ componentDidMount = () => {
       if(dados !== null && dados !== undefined) this.setState({recuperados: dados.recovered, mortos: dados.deaths, contaminados: dados.cases})
       api.get(`countries`, 1).then((dados)=>{
         if(dados !== null && dados !== undefined) {
-            var categories = [], data = []
+            var categories = [], data = [], data2 = []
             dados.forEach((e, i)=>{
-              if(i>9) return
+              if(i>4) return
               data.push(e.todayCases)
+              data2.push(e.todayDeaths)
               categories.push(e.country)
             })  
 
-            this.setState({showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}]})
+            this.setState({showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}, {name: 'Mortos hoje', data: data2}]})
         } else this.setState({showLoading: false})
       })
     })
@@ -98,7 +99,7 @@ render(){
                   <Grid item xs={12} md={9}>
                       <div className={'cardResumo card'}>
                           <div className="mixed-chart">
-                              <Chart options={this.state.options} series={this.state.series} type="bar" width="100%"/>
+                              <Chart options={this.state.options} series={this.state.series} type="line" width="100%"/>
                           </div>
                       </div>
                   </Grid>
