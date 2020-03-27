@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
 import {Grid} from '@material-ui/core'
-import Card from './Card'
+import Card from '../components/Card'
 import {api} from '../connection/api'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
@@ -78,8 +78,8 @@ render(){
 export const Div = styled.div`
   .cardCont{
         padding-left: 15px;
-        color: #F7C548 !important;
-        border-left: 4px solid #F7C548;
+        color: #DB5ABA !important;
+        border-left: 4px solid #DB5ABA;
         border-radius: 5px;
         height: 110px;
         box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
@@ -87,8 +87,8 @@ export const Div = styled.div`
 
   .cardRec{
       padding-left: 15px;
-      color: #DB5ABA !important;
-      border-left: 4px solid #DB5ABA;
+      color: #e8b127 !important;
+      border-left: 4px solid #e8b127;
       border-radius: 5px;
       height: 110px;
       box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
@@ -105,8 +105,8 @@ export const Div = styled.div`
 
   .cardAtivo  {
     padding-left: 15px;
-    color:  #5AD2F4 !important;
-    border-left: 4px solid  #5AD2F4;
+    color:  #39bfe6 !important;
+    border-left: 4px solid  #39bfe6;
     border-radius: 5px;
     height: 110px;
     box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);

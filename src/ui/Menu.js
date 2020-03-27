@@ -110,7 +110,7 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-            <Link  to='/paises'>
+            <Link  to='/'>
                 <ListItem button>
                     <ListItemIcon><InboxIcon /></ListItemIcon>
                     <ListItemText primary={'Resumo Mundial'} />
@@ -124,7 +124,7 @@ export default function PersistentDrawerLeft(props) {
                 </ListItem>
             </Link>
             
-            <Link  to='/paises'>
+            <Link  to='/noticias'>
                 <ListItem button >
                     <ListItemIcon><InboxIcon /></ListItemIcon>
                     <ListItemText primary={'Últimas Notícias'} />

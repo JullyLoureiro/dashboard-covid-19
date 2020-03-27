@@ -1,5 +1,5 @@
 import React from 'react'
-import {formataMilhar} from '../components/Mascaras'
+import {formataMilhar} from './Mascaras'
 
 export default class App extends React.Component {
   
