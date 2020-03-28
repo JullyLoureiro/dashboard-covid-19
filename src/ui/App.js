@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu from '../components/Menu'
+import Template from '../components/Template'
 import {Grid} from '@material-ui/core'
 import Card from '../components/Card'
 import {api} from '../connection/api'
@@ -74,7 +74,7 @@ render(){
         <div className="App" style={{height: 'auto'}}>
           {showLoading && <Loading />}
           <header className="App-header">
-            <Menu>
+            <Template value={0}>
               <Div>
                 <h1 style={{textAlign: 'center'}}>Resumo Mundial</h1>
 
@@ -105,7 +105,7 @@ render(){
                   </Grid>
                 </Grid>
               </Div>
-            </Menu>
+            </Template>
 
           </header>
         </div>

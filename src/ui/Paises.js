@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu from '../components/Menu'
+import Template from '../components/Template'
 import {api} from '../connection/api'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
@@ -25,7 +25,7 @@ class Busca extends React.Component {
 
     render() {
       return (
-        <SearchBar value={this.state.busca} onChange={(text) => this.setState({busca: text})} onRequestSearch={() => {return this.props.children(this.state.busca)}} style={{margin: '0 auto', maxWidth: 800}} />
+        <SearchBar value={this.state.busca} onChange={(text) => this.setState({busca: text})} onRequestSearch={() => {return this.props.children(this.state.busca)}} onCancelSearch={()=>{this.setState({busca:''})}} style={{margin: '0 auto', maxWidth: 800}} />
       )
     }
 }
@@ -61,8 +61,10 @@ render(){
         <div className="App">
           {showLoading && <Loading />}
           <header className="App-header">
-            <Menu>
+            <Template value={1}>
               <Div>
+                <h1 style={{marginBottom: 40}}>Resumo por país</h1>
+
                 <Busca>
                   {(result)=>{
                      this.setState({busca: result}, ()=>{
@@ -71,16 +73,12 @@ render(){
                      })
                   }}
                 </Busca>
-                <Grid container spacing={1}>
-                  <Grid item xs={12} md={12}>
-                      <div>
-                           <h1>Resumo por país</h1>
-                           <Lista ativo={true} colunas={_colunas} itens={itens} />
-                      </div>
-                  </Grid>
-                </Grid>
+                <div style={{marginTop: 40}}>
+                    <Lista ativo={true} colunas={_colunas} itens={itens} />
+                </div>
+                 
               </Div>
-            </Menu>
+            </Template>
           </header>
         </div>
       )
