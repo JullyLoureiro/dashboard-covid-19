@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu from './Menu'
+import Menu from '../components/Menu'
 import {api} from '../connection/api'
 import styled from 'styled-components'
 import Loading from '../components/Loading'

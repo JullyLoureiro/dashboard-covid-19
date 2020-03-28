@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu from './Menu'
+import Menu from '../components/Menu'
 import {Grid} from '@material-ui/core'
 import Card from '../components/Card'
 import {api} from '../connection/api'
