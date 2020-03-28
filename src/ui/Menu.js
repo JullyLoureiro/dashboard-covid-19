@@ -15,7 +15,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import { Link } from 'react-router-dom'
 import Chip from '@material-ui/core/Chip'
 import GitHubIcon from '@material-ui/icons/GitHub'
 

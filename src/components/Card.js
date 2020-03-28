@@ -2,11 +2,6 @@ import React from 'react'
 import {formataMilhar} from './Mascaras'
 
 export default class App extends React.Component {
-  
-    constructor(props) {
-        super(props)
-    }
-
     render(){
         return (
             <div className={this.props.classe} style={{paddingTop: 1}}>

@@ -4,9 +4,8 @@ import {api} from '../connection/api'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
 import Lista from '../components/Lista'
-import {InputBase, Grid} from '@material-ui/core'
-import SearchIcon from '@material-ui/icons/Search'
-import { fade, makeStyles } from '@material-ui/core/styles';
+import {Grid} from '@material-ui/core'
+import SearchBar from 'material-ui-search-bar'
 
 const _colunas = [
   {nome: "Ranking", tam: 1, var: "", mask: 'index', color: '#000'},
@@ -16,22 +15,20 @@ const _colunas = [
   {nome: "Recuperados", tam: 2, var: "recovered", mask: 'milhar', color: '#e8b127'},
 ]
 
-const useStyles = makeStyles(theme => ({
-  inputRoot: {
-    width: '100%',
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  }
-}));
+class Busca extends React.Component {
+    constructor(){
+      super()
+      this.state = {
+        busca: '',
+      }
+    }
+
+    render() {
+      return (
+        <SearchBar value={this.state.busca} onChange={(text) => this.setState({busca: text})} onRequestSearch={() => {return this.props.children(this.state.busca)}} style={{margin: '0 auto', maxWidth: 800}} />
+      )
+    }
+}
 
 export default class App extends React.Component {
   constructor(){
@@ -43,7 +40,20 @@ export default class App extends React.Component {
     }
 }
 
-componentDidMount = () => {this.setState({showLoading: true}, ()=>{api.get(`countries`, 1).then(dados=>{this.setState({showLoading: false, itens: dados})})})}
+componentDidMount = () => {
+  this.setState({showLoading: true}, ()=>{api.get(`countries`, 1).then(dados=>{
+      this.setState({showLoading: false, itens: dados})
+  })})
+}
+
+loadSearch = () => {
+  this.setState({showLoading: true}, ()=>{
+    const {busca, itens} = this.state
+    var array = itens.filter(item=> item.country.toLowerCase() === busca.toLowerCase())
+    this.setState({itens: array, showLoading: false})
+  })
+ 
+}
 
 render(){
       const {showLoading, itens, busca} = this.state
@@ -53,19 +63,18 @@ render(){
           <header className="App-header">
             <Menu>
               <Div>
-                <Grid  container spacing={1} style={{display:'flex', justifyContent: 'center'}}>
-                  <Grid item xs={12} md={4}>
-                      <InputBase placeholder="Search…"classes={{root: useStyles.inputRoot, input: useStyles.inputInput}} inputProps={{ 'aria-label': 'search' }}/>
-                  </Grid>
-                  <Grid item xs={12} md={1}><SearchIcon /></Grid>
-
-                </Grid>
-                
+                <Busca>
+                  {(result)=>{
+                     this.setState({busca: result}, ()=>{
+                       if(result.trim().length>0) this.loadSearch()
+                       else this.componentDidMount()
+                     })
+                  }}
+                </Busca>
                 <Grid container spacing={1}>
                   <Grid item xs={12} md={12}>
                       <div>
                            <h1>Resumo por país</h1>
-
                            <Lista ativo={true} colunas={_colunas} itens={itens} />
                       </div>
                   </Grid>
