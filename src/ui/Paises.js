@@ -56,7 +56,7 @@ loadSearch = () => {
 }
 
 render(){
-      const {showLoading, itens, busca} = this.state
+      const {showLoading, itens} = this.state
       return (
         <div className="App">
           {showLoading && <Loading />}
