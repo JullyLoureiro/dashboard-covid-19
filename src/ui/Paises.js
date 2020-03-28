@@ -49,7 +49,7 @@ componentDidMount = () => {
 loadSearch = () => {
   this.setState({showLoading: true}, ()=>{
     const {busca, itens} = this.state
-    var array = itens.filter(item=> item.country.toLowerCase() === busca.toLowerCase())
+    var array = itens.filter(item=> item.country.toLowerCase().includes(busca.toLowerCase()))
     this.setState({itens: array, showLoading: false})
   })
  
