@@ -6,6 +6,7 @@ import {api} from '../connection/api'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
 import Chart from 'react-apexcharts'
+import {rosa, verde} from '../paleta/colors'
 
 export default class App extends React.Component {
   constructor(){
@@ -39,7 +40,9 @@ export default class App extends React.Component {
         xaxis: {
           type: 'string',
           categories: []
-        }
+        },
+        colors: [verde,rosa],
+
       },
       series: []
     }

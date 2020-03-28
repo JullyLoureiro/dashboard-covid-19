@@ -4,15 +4,15 @@ import {api} from '../connection/api'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
 import Lista from '../components/Lista'
-import {Grid} from '@material-ui/core'
 import SearchBar from 'material-ui-search-bar'
+import {rosa,verde} from '../paleta/colors'
 
 const _colunas = [
   {nome: "Ranking", tam: 1, var: "", mask: 'index', color: '#000'},
   {nome: "País", tam: 4, var: "country", color: '#000'},
-  {nome: "Casos", tam: 3, var: "cases", mask: 'milhar', color: '#DB5ABA'},
-  {nome: "Mortos", tam: 2, var: "deaths", mask: 'milhar', color: '#F24333'},
-  {nome: "Recuperados", tam: 2, var: "recovered", mask: 'milhar', color: '#e8b127'},
+  {nome: "Casos", tam: 3, var: "cases", mask: 'milhar', color: rosa},
+  {nome: "Mortos", tam: 2, var: "deaths", mask: 'milhar', color: rosa},
+  {nome: "Recuperados", tam: 2, var: "recovered", mask: 'milhar', color: verde},
 ]
 
 class Busca extends React.Component {

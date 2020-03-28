@@ -29,6 +29,9 @@ class SimpleBottomNavigation extends React.Component {
         window.location.assign('/paises')
         break;
       case 2:
+        window.location.assign('/covid19')
+        break;
+      case 3:
         window.location.assign('/protejase')
         break;
     }
@@ -39,8 +42,8 @@ class SimpleBottomNavigation extends React.Component {
 
     return (
       <div>
-         <div style={{position: 'fixed', top: 10, width: '100%', textAlign:'end'}}>
-              <Chip icon={<GitHubIcon style={{ color: '#fff' }}/>} style={{ marginRight: 8, marginTop: 8, color: '#fff', backgroundColor: preto}} size="medium"  label="Desenvolvido por Juliana Loureiro" onClick={()=>{window.open('https://github.com/JullyLoureiro/AppCovid19', '_blank')}}/>
+         <div style={{zIndex: 9999, position: 'fixed', top: 10, width: '100%', textAlign:'end'}}>
+              <Chip icon={<GitHubIcon style={{ color: '#fff' }}/>} style={{ marginRight: 8, marginTop: 8, color: '#fff', backgroundColor: rosa}} size="medium"  label="Desenvolvido por Juliana Loureiro" onClick={()=>{window.open('https://github.com/JullyLoureiro/AppCovid19', '_blank')}}/>
           </div>
   
         <div style={{padding:30, marginBottom: 60}}>
