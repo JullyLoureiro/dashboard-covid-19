@@ -55,7 +55,7 @@ class SimpleBottomNavigation extends React.Component {
             <BottomNavigationAction style={{color: value === 0 ? rosa : '#fff'}} label="Resumo Mundial" icon={<RestoreIcon style={{ color: value === 0 ? rosa : '#fff' }}/>} />
             <BottomNavigationAction style={{ color: value === 1 ? rosa : '#fff' }} label="Resumo por País" icon={<FavoriteIcon style={{ color: value === 1 ? rosa : '#fff' }}/>} />
             <BottomNavigationAction style={{ color: value === 2 ? rosa : '#fff' }} label="Covid-19" icon={<LocationOnIcon style={{ color: value === 2 ? rosa : '#fff' }}/>} />
-            <BottomNavigationAction style={{ color: value === 3? rosa : '#fff' }} label="Proteja-se" icon={<LocationOnIcon style={{ color: value === 3 ? rosa : '#fff' }}/>} />
+            <BottomNavigationAction style={{ color: value === 3 ? rosa : '#fff' }} label="Proteja-se" icon={<LocationOnIcon style={{ color: value === 3 ? rosa : '#fff' }}/>} />
           </BottomNavigation>
            
         </div>

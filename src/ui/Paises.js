@@ -36,23 +36,23 @@ export default class App extends React.Component {
     this.state = {
       showLoading: true,
       itens: [],
+      itensAll: [],
       busca: '',
     }
 }
 
 componentDidMount = () => {
   this.setState({showLoading: true}, ()=>{api.get(`countries`, 1).then(dados=>{
-      this.setState({showLoading: false, itens: dados})
+      this.setState({showLoading: false, itens: dados, itensAll: dados})
   })})
 }
 
 loadSearch = () => {
   this.setState({showLoading: true}, ()=>{
-    const {busca, itens} = this.state
-    var array = itens.filter(item=> item.country.toLowerCase().includes(busca.toLowerCase()))
+    const {busca, itensAll} = this.state
+    var array = itensAll.filter(item=> item.country.toLowerCase().includes(busca.toLowerCase()))
     this.setState({itens: array, showLoading: false})
   })
- 
 }
 
 render(){
