@@ -46,14 +46,14 @@ class SimpleBottomNavigation extends React.Component {
               <Chip icon={<GitHubIcon style={{ color: '#fff' }}/>} style={{ marginRight: 8, marginTop: 8, color: '#fff', backgroundColor: rosa}} size="medium"  label="Desenvolvido por Juliana Loureiro" onClick={()=>{window.open('https://github.com/JullyLoureiro/AppCovid19', '_blank')}}/>
           </div>
   
-        <div style={{padding:30, marginBottom: 60}}>
+        <div style={{paddingLeft:20, paddingRight:20, paddingTop: 50, marginBottom: 60}}>
           {this.props.children}
         </div>
   
         <div style={{width: '100%',position: 'fixed', bottom: 0}}>
           <BottomNavigation value={value} onChange={(event, newValue) => {this.clickMenu(newValue)}}  showLabels className={classes.root}>
-            <BottomNavigationAction style={{color: value === 0 ? rosa : '#fff'}} label="Resumo Mundial" icon={<RestoreIcon style={{ color: value === 0 ? rosa : '#fff' }}/>} />
-            <BottomNavigationAction style={{ color: value === 1 ? rosa : '#fff' }} label="Resumo por País" icon={<FavoriteIcon style={{ color: value === 1 ? rosa : '#fff' }}/>} />
+            <BottomNavigationAction style={{color: value === 0 ? rosa : '#fff'}} label="Mundial" icon={<RestoreIcon style={{ color: value === 0 ? rosa : '#fff' }}/>} />
+            <BottomNavigationAction style={{ color: value === 1 ? rosa : '#fff' }} label="Países" icon={<FavoriteIcon style={{ color: value === 1 ? rosa : '#fff' }}/>} />
             <BottomNavigationAction style={{ color: value === 2 ? rosa : '#fff' }} label="Covid-19" icon={<LocationOnIcon style={{ color: value === 2 ? rosa : '#fff' }}/>} />
             <BottomNavigationAction style={{ color: value === 3 ? rosa : '#fff' }} label="Proteja-se" icon={<LocationOnIcon style={{ color: value === 3 ? rosa : '#fff' }}/>} />
           </BottomNavigation>

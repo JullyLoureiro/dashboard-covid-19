@@ -6,7 +6,7 @@ import {rosa} from '../paleta/colors'
 export default class App extends React.Component {
     render(){
         return (
-            <Card border="light" style={{ width: '18rem' }}>
+            <Card border="light" style={{ width: '100%' }}>
                 <Card.Header> <Card.Title>{this.props.titulo}</Card.Title></Card.Header>
                 <Card.Body style={{padding: '0.9rem'}}>
                     <Card.Text>

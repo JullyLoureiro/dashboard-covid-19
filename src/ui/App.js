@@ -6,7 +6,7 @@ import {api} from '../connection/api'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
 import Chart from 'react-apexcharts'
-import {rosa, verde} from '../paleta/colors'
+import {rosa, verde, roxo} from '../paleta/colors'
 
 export default class App extends React.Component {
   constructor(){
@@ -17,9 +17,25 @@ export default class App extends React.Component {
       mortos: 0,
       recuperados: 0,
 
-      options: {
+      //options bar
+      optionsBar: {
         chart: {
           id: "basic-bar",
+          toolbar: {
+            show: false
+          }
+        },
+        xaxis: {
+          type: 'string',
+          categories: []
+        },
+        colors: [roxo],
+
+      },
+      //options area
+      options: {
+        chart: {
+          id: "basic-area",
           toolbar: {
             show: true,
             offsetX: 0,
@@ -44,7 +60,15 @@ export default class App extends React.Component {
         colors: [verde,rosa],
 
       },
-      series: []
+
+      //options donut
+      optionsDonut:{
+        colors: [rosa, roxo, verde],
+        labels: ['Mortos', 'Recuperados', 'Ativos']
+      },
+
+      series: [], 
+      seriebrazil: []
     }
   }
 
@@ -52,13 +76,34 @@ export default class App extends React.Component {
 
 componentDidMount = () => {
   this.setState({showLoading: true}, ()=>{
+    //carrega gráfico brazil
+    api.get(`countries/brazil`, 1).then(dados=>{
+        var serie = [], categoria = []
+        serie.push(dados.cases)
+        categoria.push('Casos')
+
+        serie.push(dados.deaths)
+        categoria.push('Mortos')
+        
+        serie.push(dados.recovered)
+        categoria.push('Recuperados')
+
+        serie.push(dados.active)
+        categoria.push('Ativos')
+
+        this.setState({seriebrazil: [{name: 'Brasil', data: serie}], optionsBar:{...this.state.optionsBar, xaxis: {type:'string', categories: categoria}} })
+    })
+
+    //carrega dados do card
     api.get(`all`, 1).then(dados=>{
       if(dados !== null && dados !== undefined) this.setState({recuperados: dados.recovered, mortos: dados.deaths, contaminados: dados.cases})
+      
+      //carrega dados do gráfico de área
       api.get(`countries`, 1).then((dados)=>{
         if(dados !== null && dados !== undefined) {
             var categories = [], data = [], data2 = []
             dados.forEach((e, i)=>{
-              if(i>14) return
+              if(i>5) return
               data.push(e.todayCases)
               data2.push(e.todayDeaths)
               categories.push(e.country)
@@ -85,24 +130,38 @@ render(){
                   <Grid item xs={12} md={3}>
                     <Grid container spacing={2} direction={'column'}>
                         <Grid item xs={12} md={12}>
-                            <Card classe={'cardCont card'} titulo={'Contaminados'} valor={contaminados}/>
+                            <Card titulo={'Contaminados'} valor={contaminados}/>
                         </Grid>
                         <Grid item xs={12} md={12}>
-                            <Card classe={'cardMort card'} titulo={'Mortos'} valor={mortos} />
+                            <Card titulo={'Mortos'} valor={mortos} />
                         </Grid>
                         <Grid item xs={12} md={12}>
-                            <Card classe={'cardRec card'} titulo={'Recuperados'} valor={recuperados} />
+                            <Card titulo={'Recuperados'} valor={recuperados} />
                         </Grid>
                         <Grid item xs={12} md={12}>
-                            <Card classe={'cardAtivo card'} titulo={'Ativos'} valor={contaminados - recuperados - mortos} />
+                            <Card titulo={'Ativos'} valor={contaminados - recuperados - mortos} />
                         </Grid>
                     </Grid>
                   </Grid>
 
                   <Grid item xs={12} md={9}>
-                      <div className={'cardResumo card'}>
+                      <div className={'cardResumo card'} style={{padding:30}}>
+                          <div className="donut">
+                            <Grid container spacing={2} >
+                                  <Grid item xs={12} md={6}>
+                                    <Chart options={this.state.optionsDonut}  series={[mortos, recuperados, (contaminados - recuperados - mortos)]} type="donut" width="380"/>
+                                    <span style={{color: '#b3b3b3', fontSize:12}}>Percentual de casos ativos, mortos e recuperados em relação ao total de casos confirmados.</span>
+                                  </Grid>
+                                  <Grid item xs={12} md={6}>
+                                      <Chart options={this.state.optionsBar} series={this.state.seriebrazil} type="bar" width="100%"/>
+                                      <span style={{color: '#b3b3b3', fontSize:12}}>Casos confirmados, ativos, mortos e recuperados no Brasil.</span>
+                                  </Grid>
+                            </Grid>
+                           
+                          </div>
                           <div className="mixed-chart">
-                              <Chart options={this.state.options} series={this.state.series} type="line" width="100%"/>
+                              <Chart options={this.state.options} series={this.state.series} type="area" width="100%"/>
+                              <span style={{color: '#b3b3b3', fontSize:12}}>Mortes e casos confirmados de hoje.</span>
                           </div>
                       </div>
                   </Grid>
@@ -118,51 +177,6 @@ render(){
 
 
 export const Div = styled.div`
-  .cardCont{
-        padding-left: 15px;
-        color: #DB5ABA !important;
-        border-left: 4px solid #DB5ABA;
-        border-radius: 5px;
-        height: 130px;
-        box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .cardRec{
-      padding-left: 15px;
-      color: #e8b127 !important;
-      border-left: 4px solid #e8b127;
-      border-radius: 5px;
-      height: 130px;
-      box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .cardMort {
-    padding-left: 15px;
-    color: #F24333 !important;
-    border-left: 4px solid #F24333;
-    border-radius: 5px;
-    height: 130px;
-    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .cardAtivo  {
-    padding-left: 15px;
-    color:  #39bfe6 !important;
-    border-left: 4px solid  #39bfe6;
-    border-radius: 5px;
-    height: 130px;
-    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .cardResumo  {
-    padding: 8px 16px  !important;
-    color: #000 !important;
-    border-radius: 5px;
-    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-  .card: hover{
-      box-shadow:none;
-  }
-
+ 
 `;
 

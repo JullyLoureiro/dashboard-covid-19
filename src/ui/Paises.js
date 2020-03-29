@@ -5,13 +5,13 @@ import styled from 'styled-components'
 import Loading from '../components/Loading'
 import Lista from '../components/Lista'
 import SearchBar from 'material-ui-search-bar'
-import {rosa,verde} from '../paleta/colors'
+import {rosa,verde, roxo} from '../paleta/colors'
 
 const _colunas = [
   {nome: "Ranking", tam: 1, var: "", mask: 'index', color: '#000'},
   {nome: "País", tam: 4, var: "country", color: '#000'},
   {nome: "Casos", tam: 3, var: "cases", mask: 'milhar', color: rosa},
-  {nome: "Mortos", tam: 2, var: "deaths", mask: 'milhar', color: rosa},
+  {nome: "Mortos", tam: 2, var: "deaths", mask: 'milhar', color: roxo},
   {nome: "Recuperados", tam: 2, var: "recovered", mask: 'milhar', color: verde},
 ]
 

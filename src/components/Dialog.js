@@ -6,9 +6,10 @@ import MuiDialogContent from '@material-ui/core/DialogContent'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
-import { Card, CardContent } from '@material-ui/core'
-import styled from 'styled-components'
 import {formataMilhar} from './Mascaras'
+import ListGroup from 'react-bootstrap/ListGroup'
+import { rosa, verde} from '../paleta/colors'
+import {Chip, Grid} from '@material-ui/core'
 
 const styles = theme => ({
   root: {
@@ -48,74 +49,31 @@ export default function CustomizedDialogs(props) {
   const {item, open, close} = props
   return (
     <div>
-      <Dialog onClose={close} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={close}>{item ? item.country : ''}</DialogTitle>
+      <Dialog  onClose={close} aria-labelledby="customized-dialog-title" open={open}>
+        <DialogTitle  id="customized-dialog-title" onClose={close}>{item ? item.country : ''}</DialogTitle>
         {item !== null &&
-          <Div>
+          <div style={{width: '500px'}}>
             <DialogContent dividers>
-                  <Card className={"cardCont card"}>
-                      <CardContent className="">Casos: {formataMilhar(item.cases)} / Hoje: {formataMilhar(item.todayCases)} </CardContent>
-                  </Card>
-                  <Card className={"cardMort card"}>
-                      <CardContent className="">Mortos: {formataMilhar(item.deaths)} / Hoje:  {formataMilhar(item.todayDeaths)}</CardContent>
-                  </Card>
-                  <Card className={"cardRec card"}>
-                      <CardContent className="">Recuperados: {formataMilhar(item.recovered)}</CardContent>
-                  </Card>
-                  <Card className={"cardAtivo card"}>
-                      <CardContent className="">Ativos: {formataMilhar(item.active)}</CardContent>
-                  </Card>
-                  <Card className={"cardCritical card"}>
-                      <CardContent className="">Casos críticos: {formataMilhar(item.critical)}</CardContent>
-                  </Card>
-              
+                  <ListGroup variant="flush" >
+                      <Grid container spacing={1} style={{display: 'flex', justifyContent: 'center', margin: 10}}>
+                        <Grid item xs={6} md={6}>
+                            <Chip style={{ color: '#fff', backgroundColor: verde, minWidth: 200}} size="medium"  label={`Confirmados hoje: ${item.todayCases}`} />
+                        </Grid>
+                        <Grid item xs={6} md={6}>
+                            <Chip style={{ color: '#fff', backgroundColor: rosa, minWidth: 200}} size="medium"  label={`Mortos hoje: ${item.todayDeaths}`}/>
+                        </Grid>
+                      </Grid>
+                      <ListGroup.Item>Total de casos: {formataMilhar(item.cases)}</ListGroup.Item>
+                      <ListGroup.Item>Total de mortos: {formataMilhar(item.deaths)}</ListGroup.Item>
+                      <ListGroup.Item>Total de recuperados: {formataMilhar(item.recovered)}</ListGroup.Item>
+                      <ListGroup.Item>Total de casos ativos: {formataMilhar(item.active)}</ListGroup.Item>
+                      <ListGroup.Item>Total em estado crítico: {formataMilhar(item.critical)}</ListGroup.Item>
+                  </ListGroup>
             </DialogContent>
-          </Div>
+          </div>
         }
       </Dialog>
     </div>
   )
 }
-
-export const Div = styled.div`
-  .cardCont{
-        border-left: 4px solid #DB5ABA;
-        box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .cardRec{
-      border-left: 4px solid #e8b127;
-      box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .cardMort {
-    border-left: 4px solid #F24333;
-    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .cardAtivo  {
-    border-left: 4px solid  #39bfe6;
-    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .cardCritical  {
-    border-left: 4px solid  #5cd168;
-    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .card {
-    min-width: '80%';
-    margin: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    color:  #000 !important;
-    border-radius: 5px;
-    box-shadow: 0px 0px 15px rgba(174, 180, 185,.3);
-  }
-
-  .card: hover{
-      box-shadow:none;
-  }
-
-`;
 
