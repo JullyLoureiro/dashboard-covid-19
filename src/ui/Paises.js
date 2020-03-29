@@ -15,6 +15,14 @@ const _colunas = [
   {nome: "Recuperados", tam: 2, var: "recovered", mask: 'milhar', color: verde},
 ]
 
+const _colunas2 = [
+  {nome: "Ranking", tam: 1, var: "", mask: 'index', color: '#000'},
+  {nome: "País", tam: 4, var: "country", color: '#000'},
+  {nome: "Casos", tam: 3, var:"latest", var2: "confirmed", mask: 'milhar', color: rosa},
+  {nome: "Mortos", tam: 2, var:"latest", var2: "deaths", mask: 'milhar', color: roxo},
+  {nome: "Recuperados", tam: 2, var: "latest", var2: "recovered", mask: 'milhar', color: verde},
+]
+
 class Busca extends React.Component {
     constructor(){
       super()
@@ -38,12 +46,35 @@ export default class App extends React.Component {
       itens: [],
       itensAll: [],
       busca: '',
+      colunas: []
     }
+}
+
+ordena = (dados) => {
+  return dados.sort(function(a,b) {
+    if(a.cases < b.cases) return -1;
+    if(a.cases > b.cases) return 1;
+    return 0;
+  }).reverse();
+}
+
+ordenaAlternativa = (dados) => {
+  return dados.sort(function(a,b) {
+    if(a.latest.confirmed < b.latest.confirmed) return -1;
+    if(a.latest.confirmed > b.latest.confirmed) return 1;
+    return 0;
+  }).reverse();
 }
 
 componentDidMount = () => {
   this.setState({showLoading: true}, ()=>{api.get(`countries`, 1).then(dados=>{
-      this.setState({showLoading: false, itens: dados, itensAll: dados})
+      var array = this.ordena(dados)
+      this.setState({showLoading: false, itens: array, itensAll: array, colunas: _colunas})
+  }).catch(()=>{
+      this.setState({showLoading: true}, ()=>{api.get(`locations`, 2).then(dados=>{
+        var array = this.ordenaAlternativa(dados.locations)
+        this.setState({showLoading: false, itens: array, itensAll: array,colunas: _colunas2})
+      })})
   })})
 }
 
@@ -74,7 +105,7 @@ render(){
                   }}
                 </Busca>
                 <div style={{marginTop: 40}}>
-                    <Lista ativo={true} colunas={_colunas} itens={itens} />
+                    <Lista ativo={true} colunas={this.state.colunas} itens={itens} />
                 </div>
                  
               </Div>

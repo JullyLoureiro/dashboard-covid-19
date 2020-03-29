@@ -1,13 +1,11 @@
 
 const linkapi = 'https://coronavirus-19-api.herokuapp.com/'
 const linkapi2 = 'http://coronavirus-tracker-api.herokuapp.com/v2/'
-const linkapi3 = 'https://covid.migre.me/api'
 
 const _api = async (_url,link,_method, _body) => {
     var api
     if(link === 1) api = linkapi
     else if(link === 2) api = linkapi2
-    else api = linkapi3
 
     const response = await fetch(api + _url, { 
         method: _method, 

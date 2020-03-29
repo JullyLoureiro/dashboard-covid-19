@@ -68,53 +68,129 @@ export default class App extends React.Component {
       },
 
       series: [], 
-      seriebrazil: []
+      seriebrazil: [],
+      tituloGraficoArea: '',
     }
   }
 
-  
+  setaDadosBrazil = (dados) => {
+      var serie = [], categoria = []
+      serie.push(dados.cases)
+      categoria.push('Casos')
 
-componentDidMount = () => {
-  this.setState({showLoading: true}, ()=>{
-    //carrega gráfico brazil
-    api.get(`countries/brazil`, 1).then(dados=>{
-        var serie = [], categoria = []
-        serie.push(dados.cases)
-        categoria.push('Casos')
-
-        serie.push(dados.deaths)
-        categoria.push('Mortos')
-        
-        serie.push(dados.recovered)
-        categoria.push('Recuperados')
-
-        serie.push(dados.active)
-        categoria.push('Ativos')
-
-        this.setState({seriebrazil: [{name: 'Brasil', data: serie}], optionsBar:{...this.state.optionsBar, xaxis: {type:'string', categories: categoria}} })
-    })
-
-    //carrega dados do card
-    api.get(`all`, 1).then(dados=>{
-      if(dados !== null && dados !== undefined) this.setState({recuperados: dados.recovered, mortos: dados.deaths, contaminados: dados.cases})
+      serie.push(dados.deaths)
+      categoria.push('Mortos')
       
-      //carrega dados do gráfico de área
-      api.get(`countries`, 1).then((dados)=>{
-        if(dados !== null && dados !== undefined) {
-            var categories = [], data = [], data2 = []
-            dados.forEach((e, i)=>{
-              if(i>5) return
-              data.push(e.todayCases)
-              data2.push(e.todayDeaths)
-              categories.push(e.country)
-            })  
+      serie.push(dados.recovered)
+      categoria.push('Recuperados')
 
-            this.setState({showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}, {name: 'Mortos hoje', data: data2}]})
-        } else this.setState({showLoading: false})
+      serie.push(dados.active)
+      categoria.push('Ativos')
+
+      this.setState({seriebrazil: [{name: 'Brasil', data: serie}], optionsBar:{...this.state.optionsBar, xaxis: {type:'string', categories: categoria}} })
+  }
+
+  setaDadosBrazilAlterativa = (dados) => {
+    var serie = [], categoria = []
+      serie.push(dados.latest.confirmed)
+      categoria.push('Confirmados')
+
+      serie.push(dados.latest.deaths)
+      categoria.push('Mortos')
+
+      this.setState({seriebrazil: [{name: 'Brasil', data: serie}], optionsBar:{...this.state.optionsBar, xaxis: {type:'string', categories: categoria}} })
+  }
+
+  ordena = (dados) => {
+    return dados.sort(function(a,b) {
+      if(a.todayCases < b.todayCases) return -1;
+      if(a.todayCases > b.todayCases) return 1;
+      return 0;
+    }).reverse();
+  }
+
+  setaDadosGraficoArea = (dados) => {
+    if(dados !== null && dados !== undefined) {
+        var categories = [], data = [], data2 = []
+    
+        var array = this.ordena(dados)
+        array.forEach((e, i)=>{
+          if(i>5) return
+          data.push(e.todayCases)
+          data2.push(e.todayDeaths)
+          categories.push(e.country)
+        })  
+
+        this.setState({tituloGraficoArea:'Maior número de mortes e casos confirmados hoje.' ,showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}, {name: 'Mortos hoje', data: data2}]})
+    } else this.setState({showLoading: false})
+  }
+
+  ordena = (dados) => {
+    return dados.sort(function(a,b) {
+      if(a.latest.confirmed < b.latest.confirmed) return -1;
+      if(a.latest.confirmed > b.latest.confirmed) return 1;
+      return 0;
+    }).reverse();
+  }
+
+  setaDadosGraficoAreaAlternativa = (dados) => {
+    if(dados !== null && dados !== undefined) {
+        var categories = [], data = [], data2 = []
+        var array = this.ordena(dados.locations)
+
+        array.forEach((e, i)=>{
+          if(i>5) return
+          data.push(e.latest.confirmed)
+          data2.push(e.latest.deaths)
+          categories.push(e.country)
+        })  
+
+        this.setState({tituloGraficoArea:'Maior número de mortes e casos confirmados.', showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}, {name: 'Mortos hoje', data: data2}]})
+    } else this.setState({showLoading: false})
+  }
+
+  setaDadosCard = (dados) => {
+      this.setState({recuperados: dados.recovered, mortos: dados.deaths, contaminados: dados.cases})
+  }
+
+  setaDadosCardAlternativa = (dados) => {
+      this.setState({recuperados: dados.latest.recovered, mortos: dados.latestdeaths, contaminados: dados.latest.confirmed})
+  }
+
+  componentDidMount = () => {
+    this.setState({showLoading: true}, ()=>{
+      //carrega gráfico brazil
+      api.get(`countries/brazil`, 1).then(dados=>{
+        this.setaDadosBrazil(dados)
+      }).catch(()=>{
+          //api alternativa dados Brasil
+          api.get(`locations/28`, 2).then(dados=>{
+            this.setaDadosBrazilAlterativa(dados)
+          }).catch(()=>{
+              alert('API com problemas, tente novamente mais tarde!')
+          })
+      })
+
+      //carrega dados do card
+      api.get(`all`, 1).then(dados=>{
+        if(dados !== null && dados !== undefined) this.setaDadosCard(dados)
+        
+        //carrega dados do gráfico de área
+        api.get(`countries`, 1).then((dados)=>{
+          this.setaDadosGraficoArea(dados)
+        }).catch(()=>{
+            api.get(`locations`, 2).then((dados)=>{
+               this.setaDadosGraficoAreaAlternativa(dados)
+            }).catch(()=>{
+                alert('API com problemas, tente novamente mais tarde!')
+            })
+        })
+      }).catch(()=>{
+          //api alternativa
+          api.get(`latest`, 2).then(dados=>this.setaDadosCardAlternativa(dados)).catch(()=>{alert('API com problemas, tente novamente mais tarde!')})
       })
     })
-  })
-}
+  }
 
 render(){
       const {showLoading, contaminados, mortos, recuperados} = this.state
@@ -161,7 +237,7 @@ render(){
                           </div>
                           <div className="mixed-chart">
                               <Chart options={this.state.options} series={this.state.series} type="area" width="100%"/>
-                              <span style={{color: '#b3b3b3', fontSize:12}}>Mortes e casos confirmados.</span>
+                              <span style={{color: '#b3b3b3', fontSize:12}}>{this.state.tituloGraficoArea}</span>
                           </div>
                       </div>
                   </Grid>

@@ -35,7 +35,10 @@ class ListaDinamica extends Component {
     }
 
     retornaMascara = (e, el, index) => {
-        var elemento = e[el.var]
+        var elemento
+        
+        if(el.var2) elemento = e[el.var] ? e[el.var][el.var2] : ''
+        else elemento = e[el.var]
 
         switch ( el.mask) {
             case 'milhar':

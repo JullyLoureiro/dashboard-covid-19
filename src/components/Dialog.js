@@ -54,21 +54,29 @@ export default function CustomizedDialogs(props) {
         {item !== null &&
           <div style={{width: '500px'}}>
             <DialogContent dividers>
+                {item.latest ? (
+                      <ListGroup variant="flush" >
+                          <ListGroup.Item>Total de casos: {formataMilhar(item.latest.confirmed)}</ListGroup.Item>
+                          <ListGroup.Item>Total de mortos: {formataMilhar(item.latest.deaths)}</ListGroup.Item>
+                          <ListGroup.Item>Total de recuperados: {formataMilhar(item.latest.recovered)}</ListGroup.Item>
+                      </ListGroup>
+                ) : (
                   <ListGroup variant="flush" >
-                      <Grid container spacing={1} style={{display: 'flex', justifyContent: 'center', margin: 10}}>
-                        <Grid item xs={12} md={6}>
-                            <Chip style={{ color: '#fff', backgroundColor: verde, minWidth: 200}} size="medium"  label={`Confirmados hoje: ${item.todayCases}`} />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <Chip style={{ color: '#fff', backgroundColor: rosa, minWidth: 200}} size="medium"  label={`Mortos hoje: ${item.todayDeaths}`}/>
-                        </Grid>
+                    <Grid container spacing={1} style={{display: 'flex', justifyContent: 'center', margin: 10}}>
+                      <Grid item xs={12} md={6}>
+                          <Chip style={{ color: '#fff', backgroundColor: verde, minWidth: 200}} size="medium"  label={`Confirmados hoje: ${item.todayCases}`} />
                       </Grid>
-                      <ListGroup.Item>Total de casos: {formataMilhar(item.cases)}</ListGroup.Item>
-                      <ListGroup.Item>Total de mortos: {formataMilhar(item.deaths)}</ListGroup.Item>
-                      <ListGroup.Item>Total de recuperados: {formataMilhar(item.recovered)}</ListGroup.Item>
-                      <ListGroup.Item>Total de casos ativos: {formataMilhar(item.active)}</ListGroup.Item>
-                      <ListGroup.Item>Total em estado crítico: {formataMilhar(item.critical)}</ListGroup.Item>
+                      <Grid item xs={12} md={6}>
+                          <Chip style={{ color: '#fff', backgroundColor: rosa, minWidth: 200}} size="medium"  label={`Mortos hoje: ${item.todayDeaths}`}/>
+                      </Grid>
+                    </Grid>
+                    <ListGroup.Item>Total de casos: {formataMilhar(item.cases)}</ListGroup.Item>
+                    <ListGroup.Item>Total de mortos: {formataMilhar(item.deaths)}</ListGroup.Item>
+                    <ListGroup.Item>Total de recuperados: {formataMilhar(item.recovered)}</ListGroup.Item>
+                    <ListGroup.Item>Total de casos ativos: {formataMilhar(item.active)}</ListGroup.Item>
+                    <ListGroup.Item>Total em estado crítico: {formataMilhar(item.critical)}</ListGroup.Item>
                   </ListGroup>
+                )}
             </DialogContent>
           </div>
         }
