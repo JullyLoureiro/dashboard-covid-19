@@ -9,9 +9,9 @@ export default class Protejase extends React.Component {
         return (
             <Template value={2}>
                 <h1 style={{textAlign: 'center'}}>Sobre o Covid-19</h1>
-                <Grid container style={{marginTop:40}}>
+                <Grid container style={{marginTop:40}} spacing={2}>
                     <Grid item xs={12} md={4}>
-                        <Card border="light" style={{ width: '18rem' }}>
+                        <Card border="light" style={{ width: '100%' }}>
                             <Card.Header> <Card.Title style={{fontSize: 25}}>O que é?</Card.Title></Card.Header>
                             <Card.Body style={{padding: '0.9rem'}}>
                                 <Card.Text style={{textAlign: 'justify'}}>
@@ -22,7 +22,7 @@ export default class Protejase extends React.Component {
                         </Card>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <Card border="light" style={{ width: '18rem'}}>
+                        <Card border="light" style={{ width: '100%'}}>
                             <Card.Header> <Card.Title style={{fontSize: 25}}>Transmissão</Card.Title></Card.Header>
                             <Card.Body style={{padding: '0.9rem'}}>
                                 <Card.Text style={{textAlign: 'justify'}}>
@@ -32,7 +32,7 @@ export default class Protejase extends React.Component {
                         </Card>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <Card border="light" style={{ width: '18rem' }}>
+                        <Card border="light" style={{ width: '100%' }}>
                             <Card.Header> <Card.Title style={{fontSize: 25}}>Sintomas</Card.Title></Card.Header>
                             <Card.Body style={{padding: '0.9rem'}}>
                                 <Card.Text style={{textAlign: 'justify'}}>

@@ -104,8 +104,8 @@ componentDidMount = () => {
             var categories = [], data = [], data2 = []
             dados.forEach((e, i)=>{
               if(i>5) return
-              data.push(e.cases)
-              data2.push(e.deaths)
+              data.push(e.todayCases)
+              data2.push(e.todayDeaths)
               categories.push(e.country)
             })  
 

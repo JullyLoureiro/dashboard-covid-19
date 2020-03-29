@@ -56,10 +56,10 @@ export default function CustomizedDialogs(props) {
             <DialogContent dividers>
                   <ListGroup variant="flush" >
                       <Grid container spacing={1} style={{display: 'flex', justifyContent: 'center', margin: 10}}>
-                        <Grid item xs={6} md={6}>
+                        <Grid item xs={12} md={6}>
                             <Chip style={{ color: '#fff', backgroundColor: verde, minWidth: 200}} size="medium"  label={`Confirmados hoje: ${item.todayCases}`} />
                         </Grid>
-                        <Grid item xs={6} md={6}>
+                        <Grid item xs={12} md={6}>
                             <Chip style={{ color: '#fff', backgroundColor: rosa, minWidth: 200}} size="medium"  label={`Mortos hoje: ${item.todayDeaths}`}/>
                         </Grid>
                       </Grid>

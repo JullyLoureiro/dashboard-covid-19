@@ -10,7 +10,7 @@ export default class Protejase extends React.Component {
             <Template value={3}>
                 <h1 style={{textAlign: 'center'}}>Proteja-se!</h1>
                 <div style={{display:'flex', justifyContent:'center'}}> 
-                    <Card border="light" style={{ width: '95%', marginTop: 30 }}>
+                    <Card border="light" style={{ width: '98%', marginTop: 30 }}>
                         <Card.Header> <Card.Title style={{fontSize: 25}}>Dicas e prevenção</Card.Title></Card.Header>
                         <Card.Body style={{padding: '0.9rem'}}>
                             <Card.Text style={{textAlign: 'justify'}}>
