@@ -104,8 +104,8 @@ componentDidMount = () => {
             var categories = [], data = [], data2 = []
             dados.forEach((e, i)=>{
               if(i>5) return
-              data.push(e.todayCases)
-              data2.push(e.todayDeaths)
+              data.push(e.cases)
+              data2.push(e.deaths)
               categories.push(e.country)
             })  
 
@@ -161,7 +161,7 @@ render(){
                           </div>
                           <div className="mixed-chart">
                               <Chart options={this.state.options} series={this.state.series} type="area" width="100%"/>
-                              <span style={{color: '#b3b3b3', fontSize:12}}>Mortes e casos confirmados de hoje.</span>
+                              <span style={{color: '#b3b3b3', fontSize:12}}>Mortes e casos confirmados.</span>
                           </div>
                       </div>
                   </Grid>
