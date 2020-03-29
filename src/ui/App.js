@@ -157,6 +157,11 @@ export default class App extends React.Component {
       this.setState({recuperados: dados.latest.recovered, mortos: dados.latestdeaths, contaminados: dados.latest.confirmed})
   }
 
+  exibeMensagem = () => {
+    this.setState({showLoading: false})
+    alert('API com problemas, tente novamente mais tarde!')
+  }
+
   componentDidMount = () => {
     this.setState({showLoading: true}, ()=>{
       //carrega gráfico brazil
@@ -167,7 +172,7 @@ export default class App extends React.Component {
           api.get(`locations/28`, 2).then(dados=>{
             this.setaDadosBrazilAlterativa(dados)
           }).catch(()=>{
-              alert('API com problemas, tente novamente mais tarde!')
+              this.exibeMensagem()
           })
       })
 
@@ -182,12 +187,12 @@ export default class App extends React.Component {
             api.get(`locations`, 2).then((dados)=>{
                this.setaDadosGraficoAreaAlternativa(dados)
             }).catch(()=>{
-                alert('API com problemas, tente novamente mais tarde!')
+                this.exibeMensagem()
             })
         })
       }).catch(()=>{
           //api alternativa
-          api.get(`latest`, 2).then(dados=>this.setaDadosCardAlternativa(dados)).catch(()=>{alert('API com problemas, tente novamente mais tarde!')})
+          api.get(`latest`, 2).then(dados=>this.setaDadosCardAlternativa(dados)).catch(()=>{this.exibeMensagem()})
       })
     })
   }
