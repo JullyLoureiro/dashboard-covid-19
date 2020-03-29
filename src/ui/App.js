@@ -121,7 +121,7 @@ export default class App extends React.Component {
           categories.push(e.country)
         })  
 
-        this.setState({tituloGraficoArea:'Maior número de mortes e casos confirmados.' ,showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}, {name: 'Mortos hoje', data: data2}]})
+        this.setState({tituloGraficoArea:'Maior número de mortes e casos confirmados.' ,showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados', data: data}, {name: 'Mortos', data: data2}]})
     } else this.setState({showLoading: false})
   }
 
@@ -145,7 +145,7 @@ export default class App extends React.Component {
           categories.push(e.country)
         })  
 
-        this.setState({tituloGraficoArea:'Maior número de casos confirmados e suas respectivas mortes.', showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}, {name: 'Mortos hoje', data: data2}]})
+        this.setState({tituloGraficoArea:'Maior número de casos confirmados e suas respectivas mortes.', showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados', data: data}, {name: 'Mortos', data: data2}]})
     } else this.setState({showLoading: false})
   }
 
