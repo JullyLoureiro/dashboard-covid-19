@@ -2,12 +2,12 @@
  import Chip from '@material-ui/core/Chip'
  import GitHubIcon from '@material-ui/icons/GitHub'
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
-import RestoreIcon from '@material-ui/icons/Restore'
+import Language from '@material-ui/icons/Language'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
+import LocalHospital from '@material-ui/icons/LocalHospital'
+import Public from '@material-ui/icons/Public'
 import { withStyles } from "@material-ui/core/styles"
 import {preto, rosa} from '../paleta/colors'
 
@@ -52,10 +52,10 @@ class SimpleBottomNavigation extends React.Component {
   
         <div style={{width: '100%',position: 'fixed', bottom: 0}}>
           <BottomNavigation value={value} onChange={(event, newValue) => {this.clickMenu(newValue)}}  showLabels className={classes.root}>
-            <BottomNavigationAction style={{color: value === 0 ? rosa : '#fff'}} label="Mundial" icon={<RestoreIcon style={{ color: value === 0 ? rosa : '#fff' }}/>} />
-            <BottomNavigationAction style={{ color: value === 1 ? rosa : '#fff' }} label="Países" icon={<FavoriteIcon style={{ color: value === 1 ? rosa : '#fff' }}/>} />
-            <BottomNavigationAction style={{ color: value === 2 ? rosa : '#fff' }} label="Covid-19" icon={<LocationOnIcon style={{ color: value === 2 ? rosa : '#fff' }}/>} />
-            <BottomNavigationAction style={{ color: value === 3 ? rosa : '#fff' }} label="Proteja-se" icon={<LocationOnIcon style={{ color: value === 3 ? rosa : '#fff' }}/>} />
+            <BottomNavigationAction style={{color: value === 0 ? rosa : '#fff'}} label="Global" icon={<Language style={{ color: value === 0 ? rosa : '#fff' }}/>} />
+            <BottomNavigationAction style={{ color: value === 1 ? rosa : '#fff' }} label="Países" icon={<Public style={{ color: value === 1 ? rosa : '#fff' }}/>} />
+            <BottomNavigationAction style={{ color: value === 2 ? rosa : '#fff' }} label="Covid-19" icon={<LocalHospital style={{ color: value === 2 ? rosa : '#fff' }}/>} />
+            <BottomNavigationAction style={{ color: value === 3 ? rosa : '#fff' }} label="Proteja-se" icon={<FavoriteIcon style={{ color: value === 3 ? rosa : '#fff' }}/>} />
           </BottomNavigation>
            
         </div>

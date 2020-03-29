@@ -149,7 +149,7 @@ render(){
                           <div className="donut">
                             <Grid container spacing={2} >
                                   <Grid item xs={12} md={6}>
-                                    <Chart options={this.state.optionsDonut}  series={[mortos, recuperados, (contaminados - recuperados - mortos)]} type="donut" width="380"/>
+                                    <Chart options={this.state.optionsDonut}  series={[mortos, recuperados, (contaminados - recuperados - mortos)]} type="donut" width="100%"/>
                                     <span style={{color: '#b3b3b3', fontSize:12}}>Percentual de casos ativos, mortos e recuperados em relação ao total de casos confirmados.</span>
                                   </Grid>
                                   <Grid item xs={12} md={6}>
