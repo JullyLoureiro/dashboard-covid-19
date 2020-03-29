@@ -103,8 +103,8 @@ export default class App extends React.Component {
 
   ordena = (dados) => {
     return dados.sort(function(a,b) {
-      if(a.todayCases < b.todayCases) return -1;
-      if(a.todayCases > b.todayCases) return 1;
+      if(a.cases < b.cases) return -1;
+      if(a.cases > b.cases) return 1;
       return 0;
     }).reverse();
   }
@@ -116,16 +116,16 @@ export default class App extends React.Component {
         var array = this.ordena(dados)
         array.forEach((e, i)=>{
           if(i>5) return
-          data.push(e.todayCases)
-          data2.push(e.todayDeaths)
+          data.push(e.cases)
+          data2.push(e.deaths)
           categories.push(e.country)
         })  
 
-        this.setState({tituloGraficoArea:'Maior número de mortes e casos confirmados hoje.' ,showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}, {name: 'Mortos hoje', data: data2}]})
+        this.setState({tituloGraficoArea:'Maior número de mortes e casos confirmados.' ,showLoading: false, options: {...this.state.options, xaxis: {type: 'string', categories: categories}}, series: [{name: 'Casos confirmados hoje', data: data}, {name: 'Mortos hoje', data: data2}]})
     } else this.setState({showLoading: false})
   }
 
-  ordena = (dados) => {
+  ordenaAlternativa = (dados) => {
     return dados.sort(function(a,b) {
       if(a.latest.confirmed < b.latest.confirmed) return -1;
       if(a.latest.confirmed > b.latest.confirmed) return 1;
@@ -136,7 +136,7 @@ export default class App extends React.Component {
   setaDadosGraficoAreaAlternativa = (dados) => {
     if(dados !== null && dados !== undefined) {
         var categories = [], data = [], data2 = []
-        var array = this.ordena(dados.locations)
+        var array = this.ordenaAlternativa(dados.locations)
 
         array.forEach((e, i)=>{
           if(i>5) return

@@ -1,6 +1,6 @@
 
 const linkapi = 'https://coronavirus-19-api.herokuapp.com/'
-const linkapi2 = 'http://coronavirus-tracker-api.herokuapp.com/v2/'
+const linkapi2 = 'https://coronavirus-tracker-api.herokuapp.com/v2/'
 
 const _api = async (_url,link,_method, _body) => {
     var api
