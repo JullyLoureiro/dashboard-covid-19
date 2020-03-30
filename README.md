@@ -9,7 +9,8 @@ Dentro da pasta AppCovid19 rode o comando yarn i para que as dependências sejam
 <br/>
 Em seguida, rode o comando yarn start.
 
-<b>Ou entre pelo link: </b> <a href="https://app-covid19.jullyloureiro.now.sh/" ></a>
+<b>Ou entre pelo link: </b>
+<a href="https://app-covid19.jullyloureiro.now.sh/">https://app-covid19.jullyloureiro.now.sh/</a>
 
 
 <img src="./src/images/printAppCovid.PNG" />
