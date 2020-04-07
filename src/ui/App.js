@@ -247,6 +247,8 @@ render(){
                       </div>
                   </Grid>
                 </Grid>
+              
+                <p style={{padding: 5, color: '#b3b3b3', textAlign:'end', fontSize: 11}}>Fonte: https://www.worldometers.info</p>
               </Div>
             </Template>
 
