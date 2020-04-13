@@ -1,5 +1,5 @@
 export const formataMilhar = (num) => {
-    if(num !== undefined) {
+    if(num !== undefined && num !== null) {
         var n = num.toString()
         var r = ''
         var x = 0

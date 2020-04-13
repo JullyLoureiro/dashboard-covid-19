@@ -50,13 +50,13 @@ export default class App extends React.Component {
     }
 }
 
-ordena = (dados) => {
-  return dados.sort(function(a,b) {
-    if(a.cases < b.cases) return -1;
-    if(a.cases > b.cases) return 1;
-    return 0;
-  }).reverse();
-}
+// ordena = (dados) => {
+//   return dados.sort(function(a,b) {
+//     if(a.cases < b.cases) return -1;
+//     if(a.cases > b.cases) return 1;
+//     return 0;
+//   }).reverse();
+// }
 
 ordenaAlternativa = (dados) => {
   return dados.sort(function(a,b) {
@@ -68,8 +68,8 @@ ordenaAlternativa = (dados) => {
 
 componentDidMount = () => {
   this.setState({showLoading: true}, ()=>{api.get(`countries`, 1).then(dados=>{
-      var array = this.ordena(dados)
-      this.setState({showLoading: false, itens: array, itensAll: array, colunas: _colunas})
+      //var array = this.ordena(dados)
+      this.setState({showLoading: false, itens: dados, itensAll: dados, colunas: _colunas})
   }).catch(()=>{
       this.setState({showLoading: true}, ()=>{api.get(`locations`, 2).then(dados=>{
         var array = this.ordenaAlternativa(dados.locations)
