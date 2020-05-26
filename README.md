@@ -1,7 +1,6 @@
 # AppCovid19
 
-<span>Com essa rápida proliferação do vírus e esses dias de quaretena, como Dev, resolvi tentar contribuir de alguma forma.
-Criei um dashboard que consome dados abertos sobre o Covid-19.</span>
+<span>Com essa rápida proliferação do vírus e esses dias de quaretena, criei um dashboard que consome dados abertos sobre o Covid-19.</span>
 
 <b>Como usar:</b>
 <br/>
