@@ -4,7 +4,7 @@
 
 <b>Como usar:</b>
 <br/>
-Dentro da pasta AppCovid19 rode o comando yarn i para que as dependências sejam instaladas.
+Dentro da pasta AppCovid19 rode o comando yarn install para que as dependências sejam instaladas.
 <br/>
 Em seguida, rode o comando yarn start.
 
